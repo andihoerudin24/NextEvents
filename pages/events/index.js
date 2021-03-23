@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { getAllEvents } from "../../helpers/api-util"
 import EventList from '../../components/events/events-list'
 import EventSearch from "../../components/events/events-search"
@@ -14,6 +15,10 @@ const AllEventsPage = (props) =>{
     }
     return(
         <Fragment>
+             <Head>
+                <title>NextJs Event</title>
+                <meta name="description" content="find a lot of greet"/>
+             </Head>
             <EventSearch onSearch={findEventsHandler}/>
             <EventList items={events} />
         </Fragment>

@@ -7,6 +7,7 @@ import Button from "../../components/ui/button";
 import ErrorAlert from "../../components/ui/error-alert";
 import useSWR from 'swr'
 import React,{useState,useEffect} from 'react'
+import Head from 'next/head'
 const FilteredEventsPage = (props) => {
   const [events,setevents] = useState('')
   const router = useRouter();
@@ -28,8 +29,20 @@ const FilteredEventsPage = (props) => {
       }
   },[data])
 
+
+  let pageHeadData = <Head>
+     
+         <title>Filter EVENTS</title>
+         <meta name="description" content={`All Event list`}/>
+  </Head>
+
   if (!events) {
-    return <p className="center">loading ....</p>;
+     return (
+          <Fragment>
+               {pageHeadData}
+              <p className="center">loading ....</p>
+          </Fragment>
+        );
   }
 
   const filteredYear = filterData[0];
@@ -37,6 +50,14 @@ const FilteredEventsPage = (props) => {
 
   const numYear = +filteredYear;
   const numMonth = +filteredMonth;
+
+
+  pageHeadData = (
+    <Head>
+         <title>Filter EVENTS</title>
+         <meta name="description" content={`All Event for ${numMonth}/${numYear}`}/>
+    </Head>
+  )
   
   
   if (
@@ -50,6 +71,7 @@ const FilteredEventsPage = (props) => {
   ) {
     return (
       <Fragment>
+        {pageHeadData}
         <ErrorAlert>
           <p>Invalid Filter, Please Adjust yout values !</p>
         </ErrorAlert>
@@ -82,6 +104,7 @@ const FilteredEventsPage = (props) => {
 
   return (
     <Fragment>
+       {pageHeadData}
       <ResultsTitle date={date} />
       <EventList items={filterdEvents} />
     </Fragment>
