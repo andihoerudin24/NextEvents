@@ -5,6 +5,7 @@ import EventLogistics from "../../components/event-detail/event-logistics";
 import EventContent from "../../components/event-detail/event-content";
 import ErrorAlert from "../../components/ui/error-alert";
 import Head from 'next/head'
+import Comment from '../../components/input/comments'
 const EventDetailPage = (props) => {
   // const router = useRouter();
   // const eventid = router.query.eventid;
@@ -30,6 +31,7 @@ const EventDetailPage = (props) => {
       <EventContent>
         <p>{event.description}</p>
       </EventContent>
+      <Comment eventId={event.id} />
     </Fragment>
   );
 };
